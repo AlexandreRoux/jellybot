@@ -1,9 +1,18 @@
+from twilio.twiml.messaging_response import MessagingResponse
 from flask import Flask, request
 import requests
-from twilio.twiml.messaging_response import MessagingResponse
+import random
+
 
 app = Flask(__name__)
 
+dict_words = \
+    {'love': ['More than you imagine',
+              'So much',
+              'Yes my fish !',
+              'Since the first day my love',
+              'Let\'s get married tomorrow'],
+     'other': []}
 
 @app.route('/bot', methods=['POST'])
 def bot():
@@ -25,13 +34,9 @@ def bot():
         # return a cat pic
         msg.media('https://cataas.com/cat')
         responded = True
-    if 'like me ?':
+    if any(x in incoming_msg for x in ['like', 'love']):
         # return a reassure phrase
-        msg.body('Yes my fish, more than you can think!')
-        responded = True
-    if 'love me ?':
-        # return a reassure phrase
-        msg.body('Yes my fish, more than you can think!')
+        msg.body(random.choice(dict_words['love']))
         responded = True
     if not responded:
         msg.body('I only know about famous quotes and cats, sorry!')
