@@ -29,6 +29,10 @@ def bot():
         # return a reassure phrase
         msg.body('Yes my fish, more than you can think!')
         responded = True
+    if 'love me ?':
+        # return a reassure phrase
+        msg.body('Yes my fish, more than you can think!')
+        responded = True
     if not responded:
         msg.body('I only know about famous quotes and cats, sorry!')
     return str(resp)
